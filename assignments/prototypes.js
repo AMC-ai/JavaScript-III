@@ -7,17 +7,29 @@
   
   Each constructor function has unique properties and methods that are defined in their block comments below:
 */
-class GameObject {
-  constructor(data = {}) {
-    this.createdAt = data.createdAt;
-    this.name = data.name;
-    this.dimensions = data.dimensions;
-  }
 
-  destroy() {
+function GameObject(data = {}) {
+  this.createdAt = data.createdAt;
+  this.name = data.name;
+  this.dimensions = data.dimensions;
+
+  this.destroy = () => {
     return `${this.name} was removed from the game.`;
   }
 }
+
+
+// class GameObject {
+//   constructor(data = {}) {
+//     this.createdAt = data.createdAt;
+//     this.name = data.name;
+//     this.dimensions = data.dimensions;
+//   }
+
+//   destroy() {
+//     return `${this.name} was removed from the game.`;
+//   }
+// }
 /*
   === GameObject ===
   * createdAt
@@ -25,17 +37,29 @@ class GameObject {
   * dimensions (These represent the character's size in the video game)
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
-
-class CharacterStats extends GameObject {
-  constructor(data = {}) {
-    super(data);
-    this.healthPoints = data.healthPoints;
-  }
-
-  takeDamage() {
+// class & constructor
+function CharacterStats(data = {}) {
+  //super()
+  GameObject.call(this, data);
+  // property assignment
+  this.healthPoints = data.healthPoints;
+  // method assignment
+  this.takeDamage = () => {
     return `${this.name} took damage.`;
   }
 }
+
+
+// class CharacterStats extends GameObject {
+//   constructor(data = {}) {
+//     super(data);
+//     this.healthPoints = data.healthPoints;
+//   }
+
+//   takeDamage() {
+//     return `${this.name} took damage.`;
+//   }
+// }
 
 /*
   === CharacterStats ===
@@ -43,19 +67,16 @@ class CharacterStats extends GameObject {
   * takeDamage() // prototype method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's prototype
 */
-
-class Humanoid extends CharacterStats {
-  constructor(data) {
-    super(data);
-    this.team = data.team;
-    this.weapons = data.weapons;
-    this.language = data.language;
-  }
-
-  greet() {
+function Humanoid(data = {}) {
+  CharacterStats.call(this, data);
+  this.team = data.team;
+  this.weapons = data.weapons;
+  this.language = data.language;
+  this.greet = () => {
     return `${this.name} offers a greeting in ${this.language}.`
   }
 }
+
 
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
